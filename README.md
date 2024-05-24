@@ -49,26 +49,26 @@ const config: Config = {
 4. Instalando as dependencias
 
 ```bash
-    npm install
+npm install
 ```
 
 5. Compilando o bot
 
 ```bash
-    tsc
+tsc
 ```
 
 6. Iniciando o bot
 
 ```bash
-    node dist/index.js
+node dist/index.js
 ```
 
 ## 🤖 Comandos
 
 Nome | Descrição
 | - | - |
-[/ping](src/slashCommands/geral/ping.ts) | Responde qual é o tempo de resposta do bot"
+[/ping](src/slashCommands/geral/ping.ts) | Responde qual é o tempo de resposta do bot
 
 ## 📝 Licença
 
