@@ -1,0 +1,8 @@
+node_modules/
+dist/
+
+src/configs/config.ts
+package-lock.json
+autocompiler.bat
+compilar.bat
+start.bat

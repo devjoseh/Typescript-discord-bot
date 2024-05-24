@@ -1,0 +1,18 @@
+interface Config {
+    token: string;
+    prefix: string;
+    guild_id: string;
+    client_id: string;
+    owner_id: string;
+}
+
+const config: Config = {
+    token: "",
+    prefix: "!",
+
+    guild_id: "",
+    client_id: "",
+    owner_id: ""
+}
+
+export default config
