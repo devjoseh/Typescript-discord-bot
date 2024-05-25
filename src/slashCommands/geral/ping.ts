@@ -6,7 +6,8 @@ module.exports = {
     name: "ping",
     description: "Teste do cmd",
     type: ApplicationCommandType.ChatInput,
-    cooldown: 2000,
+    default_member_permissions: 'ManageMessages',
+    cooldown: 2,
 
     run: async (client: any, interaction: CommandInteraction) => {
         try {

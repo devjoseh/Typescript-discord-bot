@@ -1,7 +1,6 @@
 import { EmbedBuilder, Collection, PermissionsBitField, GuildMember, ColorResolvable } from 'discord.js';
 import { parseMs } from './parsems'
 import settings from '../../configs/settings';
-//import { SlashCommand } from '../../types'; // Defina os tipos de comandos de barra personalizados
 import client from '../../index'
 
 const cooldown = new Collection<string, number>();
@@ -25,7 +24,6 @@ client.on('interactionCreate', async (interaction:any) => {
             if (cooldown.has(`slash-${slashCommand.name}${interaction.user.id}`)) {
                 let cooldownTime = cooldown.get(`slash-${slashCommand.name}${interaction.user.id}`)! - Date.now()
                 return interaction.reply({
-                    //content: settings.cooldowns.message.replace('<duration>', ms(cooldown.get(`slash-${slashCommand.name}${interaction.user.id}`)! - Date.now())),
                     content: settings.cooldowns.message.replace('<duration>', parseMs(cooldownTime)),
                     ephemeral: true,
                 });
@@ -63,10 +61,10 @@ client.on('interactionCreate', async (interaction:any) => {
             }
 
             await slashCommand.run(client, interaction);
-            cooldown.set(`slash-${slashCommand.name}${interaction.user.id}`, Date.now() + slashCommand.cooldown);
+            cooldown.set(`slash-${slashCommand.name}${interaction.user.id}`, Date.now() + (slashCommand.cooldown * 1000));
             setTimeout(() => {
                 cooldown.delete(`slash-${slashCommand.name}${interaction.user.id}`);
-            }, slashCommand.cooldown);
+            }, slashCommand.cooldown * 1000);
         } else {
             if (slashCommand.userRoles && !checkPermissions(interaction.member as GuildMember, slashCommand.userRoles)) {
                 const userRolesError = new EmbedBuilder()
@@ -99,7 +97,16 @@ client.on('interactionCreate', async (interaction:any) => {
                 }
             }
 
-            await slashCommand.run(client, interaction);
+            try {
+                await slashCommand.run(client, interaction);
+            } catch (error) {
+                console.error(error);
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: `⚠️ Ocorreu um erro ao tentar executar este comando. \nMais informações no console.`, ephemeral: true });
+                } else {
+                    await interaction.reply({ content: `⚠️ Ocorreu um erro ao tentar executar este comando. \nMais informações no console.`, ephemeral: true });
+                }
+            } 
         }
     } catch (error) {
         console.log(error);
