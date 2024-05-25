@@ -3,6 +3,13 @@ import path from 'path'
 import chalk from 'chalk'
 import config from '../configs/config'
 
+import {
+	type RESTPostAPIApplicationCommandsJSONBody,
+	type RESTPostAPIApplicationGuildCommandsJSONBody,
+	type RESTPutAPIApplicationCommandsJSONBody,
+	type RESTPutAPIApplicationGuildCommandsJSONBody,
+} from 'discord.js';
+
 import { PermissionsBitField } from 'discord.js'
 import { Routes } from 'discord-api-types/v10'
 import { REST } from '@discordjs/rest'
@@ -15,7 +22,7 @@ let table = new Table({
 const rest = new REST({ version: '10'}).setToken(config.token)
 
 export = async (client:any): Promise<void> => {
-    const slashCommands:object[] = []
+    const slashCommands:RESTPostAPIApplicationCommandsJSONBody[] | RESTPostAPIApplicationGuildCommandsJSONBody[] = [];
 
     let quantityLoaded:number = 0
 
@@ -51,12 +58,19 @@ export = async (client:any): Promise<void> => {
         }
     });
 
-    console.log(chalk.yellowBright(table.toString()));
-    console.log(chalk.yellowBright(`Foram carregados ${quantityLoaded} Slash Commands`));
-
     (async () => {
+
+        let data: RESTPutAPIApplicationCommandsJSONBody[] | RESTPutAPIApplicationGuildCommandsJSONBody[] = [];
+
         try {
-            await rest.put(Routes.applicationGuildCommands(config.client_id, config.guild_id), {body: slashCommands})
+            if(config.guild_id) {
+                data = await rest.put(Routes.applicationGuildCommands(config.client_id, config.guild_id), {body: slashCommands}) as RESTPutAPIApplicationGuildCommandsJSONBody[];
+            } else {
+                data = await rest.put(Routes.applicationCommands(config.client_id), { body: slashCommands }) as RESTPutAPIApplicationCommandsJSONBody[];
+            }
+
+            console.log(chalk.yellowBright(table.toString()));
+            console.log(chalk.yellowBright(`Foram carregados ${data.length} Slash Commands ${config.guild_id ? `no servidor ${config.guild_id}` : `globalmente`} `));
         } catch (error) {
             console.log(chalk.redBright(`${error}`))
         }
