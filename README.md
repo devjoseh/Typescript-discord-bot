@@ -72,6 +72,9 @@ npm run deploy
 npm run start
 ```
 
+> [!NOTE]
+> Caso tenha terminado de configurar tudo, você também pode iniciar o bot pelo arquivo `start.bat`
+
 ## 👨‍💻 Comandos do Terminal
 
 Comando | Ação
