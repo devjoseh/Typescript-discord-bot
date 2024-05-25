@@ -34,8 +34,6 @@ git clone https://github.com/devjoseh/Typescript-discord-bot.git
 const config: Config = {
     token: "",
     # O token do seu bot
-    prefix: "/",
-    # Prefix padrão (caso queira colocar message commands)
 
     guild_id: "",
     # ID do servidor principal do bot
@@ -46,6 +44,10 @@ const config: Config = {
 }
 ```
 
+> [!NOTE]
+> Se você configurar o `guild_id` como: `guild_id: null` os comandos serão registrados globalmente.
+> Para configurar os comandos em apenas um servidor, configure como `guild_id: "ID DO SERVIDOR"`
+
 4. Instalando as dependencias
 
 ```bash
@@ -55,14 +57,23 @@ npm install
 5. Compilando o bot
 
 ```bash
-tsc
+npm run deploy
 ```
 
 6. Iniciando o bot
 
 ```bash
-node dist/index.js
+npm run start
 ```
+
+## 👨‍💻 Comandos do Terminal
+
+Comando | Ação
+| - | - |
+`npm run start` | Inicia o bot
+`npm run clean` | Deleta todos os arquivos da pasta dist
+`npm run watch` | Inicia a compilação do bot em modo observação
+`npm run deploy`| Compila todos os arquivos TypeScript
 
 ## 🤖 Comandos
 
