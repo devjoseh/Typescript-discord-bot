@@ -2,6 +2,12 @@
 
 ### Este é um bot simples feito usando apenas TypeScript, ótimo para iniciar um projeto para um servidor do discord.
 
+## 🧑  Autor
+
+Quer me mandar uma mensagem ou dar uma espiada nas minhas redes sociais?
+
+[![instagram](https://img.shields.io/badge/instagram-A425E4?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/dev_joseh/) [![youtube](https://img.shields.io/badge/youtube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCHxmaCQRQcJ1Y1fWDvGPktQ) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/josé-hernanes-b4b155249/) 
+
 ## 🔧 Funções 
 
 - Cooldown em comandos;
@@ -80,6 +86,19 @@ Comando | Ação
 Nome | Descrição
 | - | - |
 [/ping](src/slashCommands/geral/ping.ts) | Responde qual é o tempo de resposta do bot
+
+## 💡 Estrutura dos Comandos
+
+Abra o arquivo command.ts.example para ter acesso a uma estrutura de exemplo para criação de comandos <br>
+Você pode alterar o comando da forma que quiser <br>
+
+## ⛔ Dúvidas / Sugestões / Problemas
+
+Caso tenha alguma dúvida, sugestão ou tenha encontrado algum problema, por favor abbra um **[issue](https://github.com/devjoseh/Typescript-discord-bot/issues/new)** e aguarde por uma resposta.
+
+## 🙌 Contribuições
+
+Contribuições são muito bem vindas! Abra um em **[pull request](https://github.com/devjoseh/Typescript-discord-bot/pulls)**.
 
 ## 📝 Licença
 
