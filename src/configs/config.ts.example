@@ -1,18 +1,18 @@
 interface Config {
     token: string;
     prefix: string;
-    guild_id: string;
+    guild_id: string | null;
     client_id: string;
     owner_id: string;
 }
 
 const config: Config = {
     token: "",
-    prefix: "!",
 
-    guild_id: "",
-    client_id: "",
-    owner_id: ""
+    guild_id: "1101935570827096235",
+    //guild_id: null, // Para configurar os comandos globalmente
+    client_id: "754566993016782850",
+    owner_id: "434791887241740288"
 }
 
 export default config
