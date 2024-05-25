@@ -22,7 +22,7 @@ export function parseMs(tempoEmMs: number): string {
     let resultado = '';
     if (semanas > 0) resultado += `${semanas}w `;
     if (dias > 0) resultado += `${dias}d `;
-    if (horas > 0) resultado += `${horas}hr `;
+    if (horas > 0) resultado += `${horas}h `;
     if (minutos > 0) resultado += `${minutos}m `;
     if (segundos > 0) resultado += `${segundos}s`;
 
