@@ -10,7 +10,6 @@ const client: any = new Client({
 });
 
 client.slashCommands = new Collection()
-client.prefix = config.prefix;
 client.config = config;
 export default client;
 
