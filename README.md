@@ -94,7 +94,7 @@ Você pode alterar o comando da forma que quiser <br>
 
 ## ⛔ Dúvidas / Sugestões / Problemas
 
-Caso tenha alguma dúvida, sugestão ou tenha encontrado algum problema, por favor abbra um **[issue](https://github.com/devjoseh/Typescript-discord-bot/issues/new)** e aguarde por uma resposta.
+Caso tenha alguma dúvida, sugestão ou tenha encontrado algum problema, por favor abra um **[issue](https://github.com/devjoseh/Typescript-discord-bot/issues/new)** e aguarde por uma resposta.
 
 ## 🙌 Contribuições
 
