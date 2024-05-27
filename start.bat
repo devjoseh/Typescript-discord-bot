@@ -1,5 +1,5 @@
 echo off
-color 1
+color 2
 cls
 :a
 npm run build && npm run start:prod

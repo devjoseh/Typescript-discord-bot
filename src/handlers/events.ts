@@ -25,7 +25,7 @@ export = async (): Promise<void> => {
 
                     allEvents.push(eventName)
 
-                    // table.push([dir, eventName, `✅`])
+                    //table.push([dir, eventName, `✅`])
                     table.push([dir, eventName, `Y`])
                     quantityEvents ++
                 } catch (error) {

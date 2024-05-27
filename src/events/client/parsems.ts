@@ -3,10 +3,6 @@ export function parseMs(tempoEmMs: number): string {
     const umMinuto = 60 * umSegundo;
     const umaHora = 60 * umMinuto;
     const umDia = 24 * umaHora;
-    const umaSemana = 7 * umDia;
-
-    const semanas = Math.floor(tempoEmMs / umaSemana);
-    tempoEmMs %= umaSemana;
 
     const dias = Math.floor(tempoEmMs / umDia);
     tempoEmMs %= umDia;
@@ -20,7 +16,6 @@ export function parseMs(tempoEmMs: number): string {
     const segundos = Math.floor(tempoEmMs / umSegundo);
 
     let resultado = '';
-    if (semanas > 0) resultado += `${semanas}w `;
     if (dias > 0) resultado += `${dias}d `;
     if (horas > 0) resultado += `${horas}h `;
     if (minutos > 0) resultado += `${minutos}m `;
