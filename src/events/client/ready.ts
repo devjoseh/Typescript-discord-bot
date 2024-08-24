@@ -1,15 +1,15 @@
-import { ActivityType } from 'discord.js';
+import { ActivityType, Events } from 'discord.js';
 
 import client from '../../index.js';
-import chalk from 'chalk';
-import moment from 'moment';
+import logger from '../../services/logger'
 
+import moment from 'moment-timezone';
 moment.locale("pt-br")
 
-client.on("ready", async () => {
-
+client.on(Events.ClientReady, async () => {
     const activities: { name: string, type: ActivityType}[] = [
         { name: `👑 NestStore`, type: ActivityType.Watching},
+		{ name: `👑 NestStore`, type: ActivityType.Playing},
     ]
 
     const status: string[] = [
@@ -42,7 +42,7 @@ client.on("ready", async () => {
         s++
     }, timer * 1000)
 
-    const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    console.log(chalk.yellow(`${client.user.tag} ESTÁ ONLINE!`))
-    console.log(chalk.yellow(`Iniciado em ${currentTime}`))
+    const currentTime = moment().tz(process.env.TIMEZONE).format('YYYY-MM-DD HH:mm:ss');
+    logger.info(`${client.user.tag} ONLINE!`);
+    logger.info(`Iniciado em ${currentTime}`);
 })

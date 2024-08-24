@@ -1,4 +1,4 @@
-import { EmbedBuilder, Collection, PermissionsBitField, GuildMember, ColorResolvable } from 'discord.js';
+import { EmbedBuilder, Collection, PermissionsBitField, GuildMember, ColorResolvable, Events } from 'discord.js';
 import { parseMs } from './parsems'
 import settings from '../../configs/settings';
 import client from '../../index'
@@ -9,7 +9,7 @@ function checkPermissions(member: GuildMember, requiredRoles: string[]): boolean
     return member.roles.cache.some(role => requiredRoles.includes(role.id));
 }
 
-client.on('interactionCreate', async (interaction:any) => {
+client.on(Events.InteractionCreate, async (interaction:any) => {
     try {
         const slashCommand = client.slashCommands.get(interaction.commandName);
 
