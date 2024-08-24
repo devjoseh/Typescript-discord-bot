@@ -1,15 +1,12 @@
-import { EmbedBuilder, ApplicationCommandType, ApplicationCommandOptionType, CommandInteraction, ColorResolvable } from 'discord.js'
+import { EmbedBuilder, ApplicationCommandType, ApplicationCommandOptionType, ColorResolvable } from 'discord.js'
 
 import ss from '../../configs/settings'
-
-const staffRoles:string[] = ["1216513737842757842"]
 
 module.exports = {
     name: "ping",
     description: "Teste do cmd",
     type: ApplicationCommandType.ChatInput,
-    default_member_permissions: 'ManageMessages',
-    userRoles: staffRoles,
+    // default_member_permissions: 'ManageMessages',
     cooldown: 5,
 
     options: [
@@ -55,6 +52,8 @@ module.exports = {
     ],
 
     run: async (client: any, interaction: any) => {
+        console.log(interaction)
+        
         const cor = interaction.options.getString('cor')
         const numero = interaction.options.getNumber('numero')
         const user = interaction.options.getMember('user')
