@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
-import config from '../configs/config'
+import logger from '../services/logger'
 
 import {
 	type RESTPostAPIApplicationCommandsJSONBody,
@@ -19,7 +19,7 @@ let table = new Table({
     head: ["Pasta", "Comando", "Status"]
 })
 
-const rest = new REST({ version: '10'}).setToken(config.token)
+const rest = new REST({ version: '10'}).setToken(process.env.TOKEN)
 
 export = async (client:any): Promise<void> => {
     const slashCommands:RESTPostAPIApplicationCommandsJSONBody[] | RESTPostAPIApplicationGuildCommandsJSONBody[] = [];
@@ -50,10 +50,10 @@ export = async (client:any): Promise<void> => {
             if(slashCommand.name) {
                 client.slashCommands.set(slashCommand.name, slashCommand)
                 // table.push([dir, file.split(".js")[0], '✅'])
-                table.push([dir, file.split(".js")[0], 'Y'])
+                table.push([dir, file.split(".js")[0], 'OK'])
             } else {
                 // table.push([dir, file.split(".js")[0], '❌'])
-                table.push([dir, file.split(".js")[0], 'X'])
+                table.push([dir, file.split(".js")[0], 'ERRO'])
             }
         }
     });
@@ -63,16 +63,17 @@ export = async (client:any): Promise<void> => {
         let data: RESTPutAPIApplicationCommandsJSONBody[] | RESTPutAPIApplicationGuildCommandsJSONBody[] = [];
 
         try {
-            if(config.guild_id) {
-                data = await rest.put(Routes.applicationGuildCommands(config.client_id, config.guild_id), {body: slashCommands}) as RESTPutAPIApplicationGuildCommandsJSONBody[];
+            if(process.env.GUILD_ID) {
+                data = await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: slashCommands}) as RESTPutAPIApplicationGuildCommandsJSONBody[];
             } else {
-                data = await rest.put(Routes.applicationCommands(config.client_id), { body: slashCommands }) as RESTPutAPIApplicationCommandsJSONBody[];
+                data = await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: slashCommands }) as RESTPutAPIApplicationCommandsJSONBody[];
             }
 
             console.log(chalk.yellowBright(table.toString()));
-            console.log(chalk.yellowBright(`Foram carregados ${data.length} Slash Commands ${config.guild_id ? `no servidor ${config.guild_id}` : `globalmente`} `));
+
+            logger.info(`Foram carregados ${data.length} Slash Commands ${process.env.GUILD_ID ? `no servidor ${process.env.GUILD_ID}` : `globalmente`}`);
         } catch (error) {
-            console.log(chalk.redBright(`${error}`))
+            console.log(chalk.redBright(`${error}`));
         }
     })();
 }
